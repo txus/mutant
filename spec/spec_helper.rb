@@ -1,4 +1,4 @@
-require 'heckle'
+require 'mutant'
 require 'aruba/api'
 
 RSpec.configure do |config|

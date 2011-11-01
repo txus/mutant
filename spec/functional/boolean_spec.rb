@@ -22,7 +22,7 @@ describe 'Mutating booleans' do
               specify { Thing.type.should be_true }
             end
           """
-          Heckle::Runners::RSpec.run(output)
+          Mutant::Runners::RSpec.run(output)
         end
 
         specify 'the mutation passes' do
@@ -37,7 +37,7 @@ describe 'Mutating booleans' do
               specify { String(Thing.type).should =~ /true|false/ }
             end
           """
-          Heckle::Runners::RSpec.run(['--pattern', 'tmp/aruba/*_spec.rb'], output)
+          Mutant::Runners::RSpec.run(['--pattern', 'tmp/aruba/*_spec.rb'], output)
         end
 
         specify 'the mutation fails', :focus do

@@ -1,6 +1,6 @@
 require 'rspec/core'
 
-module Heckle
+module Mutant
   module Runners
     module RSpec
       def self.run(args, output)
