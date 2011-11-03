@@ -3,4 +3,5 @@
 Gemfile.lock
 pkg/*
 tmp
-.rbx
+*.rbx
+*.rbc
