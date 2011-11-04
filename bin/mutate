@@ -1,1 +1,5 @@
 #!/usr/bin/env ruby
+
+require 'mutant'
+
+Mutant.run(ARGV)

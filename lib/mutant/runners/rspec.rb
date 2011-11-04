@@ -3,9 +3,9 @@ require 'rspec/core'
 module Mutant
   module Runners
     module RSpec
-      def self.run(args, output)
-        raise ::RSpec::Core::Runner.run(args, $stderr, output).inspect
-        output.puts 'passed'
+      def self.run(args)
+        passed = ::RSpec::Core::Runner.run(args)
+        puts passed ? 'passed' : 'failed'
       end
     end
   end
