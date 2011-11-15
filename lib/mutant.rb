@@ -1,4 +1,5 @@
 require 'mutant/version'
+require 'mutant/rbx'
 
 module Mutant
   module Runners

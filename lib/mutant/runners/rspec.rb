@@ -2,11 +2,27 @@ require 'rspec/core'
 
 module Mutant
   module Runners
-    module RSpec
+    class RSpec
       def self.run(args)
-        passed = ::RSpec::Core::Runner.run(args)
-        puts passed ? 'passed' : 'failed'
+        runner = new(args)
+        runner.run
+        runner.mutate
+        puts runner.run.zero? ? 'failed' : 'passed'
+      end
+
+      def initialize(args)
+        @implementation = args.shift
+        @args = args
+      end
+
+      def mutate
+        Rbx.mutate(@implementation)
+      end
+
+      def run
+        ::RSpec::Core::Runner.run(@args)
       end
     end
   end
 end
+
