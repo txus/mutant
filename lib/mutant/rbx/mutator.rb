@@ -8,12 +8,13 @@ module Mutant
       def mutate
         @match.method.parse_file
 
-        ast = Marshal.load(Marshal.dump(@match.method.ast))
-        ast.body.body.array = [ swap(ast.body.body.array[0]) ]
+        @ast = Marshal.load(Marshal.dump(@match.method.ast))
+        body = @match.method.singleton? ? @ast.body.body : @ast.body
+        body.array = [ swap(body.array[0]) ]
 
         # wrap the method in an AST for the class
         class_ast = Rubinius::AST::Class.new(
-          1, @match.method_class, nil, Rubinius::AST::Block.new(1, [ ast ])
+          1, @match.method_class, nil, Rubinius::AST::Block.new(1, [ @ast ])
         )
 
         # create a script to contain the class AST

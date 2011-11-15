@@ -22,12 +22,16 @@ module Mutant
       def process_defn(*)
         super.tap { |ast| @ast = ast if match?(ast) }
       end
+
+      def instance?() true end
     end
 
     class SingletonMethod < Method
       def process_defs(*)
         super.tap { |ast| @ast = ast if match?(ast.body) }
       end
+
+      def singleton?() true end
     end
   end
 end
