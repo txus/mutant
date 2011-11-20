@@ -11,7 +11,7 @@ module Mutant
       end
 
       def initialize(args)
-        @implementation = args.shift
+        @implementation = Implementation.new(args.shift)
         @args = args
       end
 

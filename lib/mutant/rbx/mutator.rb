@@ -1,25 +1,27 @@
 module Mutant
   module Rbx
     class Mutator
-      def initialize(match)
-        @match = match
+      def initialize(mutatee)
+        @mutatee = mutatee
       end
 
       def mutate
-        @match.method.parse_file
+        @mutatee._method.parse_file
 
-        @ast = Marshal.load(Marshal.dump(@match.method.ast))
-        body = @match.method.singleton? ? @ast.body.body : @ast.body
+        @ast = Marshal.load(Marshal.dump(@mutatee._method.ast))
+        body = @mutatee._method.is_a?(SingletonMethod) ? @ast.body.body : @ast.body
         body.array = [ swap(body.array[0]) ]
+
+        block = Rubinius::AST::Block.new(1, [ @ast ])
 
         # wrap the method in an AST for the class
         class_ast = Rubinius::AST::Class.new(
-          1, @match.method_class, nil, Rubinius::AST::Block.new(1, [ @ast ])
+          1, @mutatee._class.name.to_sym, nil, block
         )
 
         # create a script to contain the class AST
         root = Rubinius::AST::Script.new(class_ast)
-        root.file = @match.method.source_file
+        root.file = @mutatee._method.source_file
 
         # setup the compiler
         compiler = Rubinius::Compiler.new(:bytecode, :compiled_method)

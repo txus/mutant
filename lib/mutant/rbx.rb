@@ -1,12 +1,12 @@
-require 'mutant/rbx/matcher'
 require 'mutant/rbx/method'
+require 'mutant/rbx/mutatee'
 require 'mutant/rbx/mutator'
 
 module Mutant
   module Rbx
     def self.mutate(implementation)
-      Matcher.match(implementation) do |match|
-        Mutator.new(match).mutate
+      implementation.mutatees.each do |mutatee|
+        Mutator.new(mutatee).mutate
       end
     end
   end
