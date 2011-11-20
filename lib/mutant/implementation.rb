@@ -9,9 +9,9 @@ module Mutant
     end
 
     def mutatees
-      [].tap do |ary|
+      [].tap do |mutatees|
         if @str =~ /#|\./
-          ary << Rbx::Mutatee.new(*details)
+          mutatees << Rbx::Mutatee.new(*details)
         end
       end
     end
