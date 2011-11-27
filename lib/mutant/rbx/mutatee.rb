@@ -1,19 +1,27 @@
 module Mutant
   module Rbx
     class Mutatee
-      def initialize(_class, scope, _method)
-        @_class, @scope, @_method = _class, scope, _method
+      extend Forwardable
+
+      attr_reader :implementation
+      
+      def initialize(implementation)
+        @implementation = implementation
       end
 
-      def _class
-        Object.const_get(@_class)
-      end
+      def_delegators :@implementation, :class_name, :method_name
 
-      def _method
+      def rbx_method
         @rbx_method ||=
-          case @scope
-          when /#/  then InstanceMethod.new(_class.instance_method(@_method))
-          when /\./ then SingletonMethod.new(_class.method(@_method))
+          case implementation.scope_type
+          when :singleton
+            SingletonMethod.new(
+              implementation.constant.method(method_name)
+            )
+          when :instance
+            InstanceMethod.new(
+              implementation.constant.instance_method(method_name)
+            )
           end
       end
     end

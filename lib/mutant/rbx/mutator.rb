@@ -6,22 +6,22 @@ module Mutant
       end
 
       def mutate
-        @mutatee._method.parse_file
+        @mutatee.rbx_method.parse_file
 
-        @ast = Marshal.load(Marshal.dump(@mutatee._method.ast))
-        body = @mutatee._method.is_a?(SingletonMethod) ? @ast.body.body : @ast.body
+        @ast = Marshal.load(Marshal.dump(@mutatee.rbx_method.ast))
+        body = @mutatee.rbx_method.is_a?(SingletonMethod) ? @ast.body.body : @ast.body
         body.array = [ swap(body.array[0]) ]
 
         block = Rubinius::AST::Block.new(1, [ @ast ])
 
         # wrap the method in an AST for the class
         class_ast = Rubinius::AST::Class.new(
-          1, @mutatee._class.name.to_sym, nil, block
+          1, @mutatee.class_name.to_sym, nil, block
         )
 
         # create a script to contain the class AST
         root = Rubinius::AST::Script.new(class_ast)
-        root.file = @mutatee._method.source_file
+        root.file = @mutatee.rbx_method.source_file
 
         # setup the compiler
         compiler = Rubinius::Compiler.new(:bytecode, :compiled_method)
