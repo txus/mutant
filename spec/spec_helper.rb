@@ -8,4 +8,7 @@ RSpec.configure do |config|
   config.include Aruba::Api, :example_group => {
     :file_path => /spec\/functional/
   }
+  config.after(:each, :example_group => {:file_path => /spec\/functional/}) do
+		FileUtils.remove_dir('tmp/aruba')
+	end
 end

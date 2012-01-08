@@ -15,14 +15,14 @@ describe 'Mutating symbols' do
 
       context 'with an expectation that the return value is :foo' do
         before do
-          write_file 'spec/thing_spec_1.rb', """
+          write_file 'spec/thing_spec.rb', """
             require 'thing'
 
             describe 'Thing.a_symbol' do
               specify { Thing.a_symbol.should eq(:foo) }
             end
           """
-          run_simple '../../bin/mutate Thing.a_symbol spec/thing_spec_1.rb'
+          run_simple '../../bin/mutate Thing.a_symbol spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -32,14 +32,14 @@ describe 'Mutating symbols' do
 
       context 'with an expectation that the return value is not :foo' do
         before do
-          write_file 'spec/thing_spec_2.rb', """
+          write_file 'spec/thing_spec.rb', """
             require 'thing'
 
             describe 'Thing.a_symbol' do
               specify { Thing.a_symbol.should_not eq(:foo) }
             end
           """
-          run_simple '../../bin/mutate Thing.a_symbol spec/thing_spec_2.rb'
+          run_simple '../../bin/mutate Thing.a_symbol spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do

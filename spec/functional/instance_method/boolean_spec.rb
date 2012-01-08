@@ -15,14 +15,14 @@ describe 'Mutating booleans' do
 
       context 'with an expectation that the return value is true' do
         before do
-          write_file 'spec/thing_spec_1.rb', """
+          write_file 'spec/thing_spec.rb', """
             require 'thing'
-            
+
             describe 'Thing#alive?' do
               specify { Thing.new.should be_alive }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec_1.rb'
+          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -32,14 +32,14 @@ describe 'Mutating booleans' do
 
       context 'with an expectation that the return value is true or false' do
         before do
-          write_file 'spec/thing_spec_2.rb', """
+          write_file 'spec/thing_spec.rb', """
             require 'thing'
-            
+
             describe 'Thing#alive?' do
               specify { String(Thing.new.alive?).should =~ /true|false/ }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec_2.rb'
+          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do
@@ -61,14 +61,14 @@ describe 'Mutating booleans' do
 
       context 'with an expectation that the return value is false' do
         before do
-          write_file 'spec/thing_spec_1.rb', """
+          write_file 'spec/thing_spec.rb', """
             require 'thing'
-            
+
             describe 'Thing.alive?' do
               specify { Thing.new.should_not be_alive }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec_1.rb'
+          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -78,14 +78,14 @@ describe 'Mutating booleans' do
 
       context 'with an expectation that the return value is true or false' do
         before do
-          write_file 'spec/thing_spec_2.rb', """
+          write_file 'spec/thing_spec.rb', """
             require 'thing'
-            
+
             describe 'Thing#alive?' do
               specify { String(Thing.new.alive?).should =~ /true|false/ }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec_2.rb'
+          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do
