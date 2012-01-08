@@ -34,6 +34,8 @@ module Mutant
         Rubinius.run_script script.compiled_method
       end
 
+      private
+
       def swap(literal)
         case literal
         when Rubinius::AST::TrueLiteral
@@ -44,6 +46,11 @@ module Mutant
           Rubinius::AST::SymbolLiteral.new(1, Random.symbol)
         when Rubinius::AST::StringLiteral
           Rubinius::AST::StringLiteral.new(1, Random.string)
+        when Rubinius::AST::Range
+          range = Random.range
+          min = Rubinius::AST::FixnumLiteral.new(1, range.min)
+          max = Rubinius::AST::FixnumLiteral.new(1, range.max)
+          Rubinius::AST::Range.new(1, min, max)
         end
       end
     end

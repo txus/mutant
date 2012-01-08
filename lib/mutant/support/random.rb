@@ -9,5 +9,11 @@ module Mutant
 		def self.symbol
 			Array.new(rand(50).next) { ALLOWED_SYMBOL_CHARACTERS.choice }.join.to_sym
 		end
+
+		def self.range
+	    min, max = rand(50)
+    	max = min + rand(50)
+    	Range.new(min, max)
+   	end
 	end
 end
