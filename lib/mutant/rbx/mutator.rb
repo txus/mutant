@@ -42,6 +42,8 @@ module Mutant
           Rubinius::AST::TrueLiteral.new(1)
         when Rubinius::AST::SymbolLiteral
           Rubinius::AST::SymbolLiteral.new(1, Random.symbol)
+        when Rubinius::AST::StringLiteral
+          Rubinius::AST::StringLiteral.new(1, Random.string)
         end
       end
     end

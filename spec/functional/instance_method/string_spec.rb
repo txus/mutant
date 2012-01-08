@@ -1,0 +1,51 @@
+require 'spec_helper'
+
+describe 'Mutating strings' do
+  context 'for an instance method' do
+    context 'that contains "foo"' do
+      before do
+        write_file 'thing.rb', """
+          class Thing
+            def a_string
+              'foo'
+            end
+          end
+        """
+      end
+
+      context 'with an expectation that the return value is "foo"' do
+        before do
+          write_file 'spec/thing_spec.rb', """
+            require 'thing'
+
+            describe 'Thing#a_string' do
+              specify { Thing.new.a_string.should eq('foo') }
+            end
+          """
+          run_simple '../../bin/mutate Thing#a_string spec/thing_spec.rb'
+        end
+
+        specify 'the mutation passes' do
+          all_output.should include('passed')
+        end
+      end
+
+      context 'with an expectation that the return value is not "foo"' do
+        before do
+          write_file 'spec/thing_spec.rb', """
+            require 'thing'
+
+            describe 'Thing#a_string' do
+              specify { Thing.new.a_string.should_not eq('foo') }
+            end
+          """
+          run_simple '../../bin/mutate Thing#a_string spec/thing_spec.rb'
+        end
+
+        specify 'the mutation fails' do
+          all_output.should include('failed')
+        end
+      end
+    end
+  end
+end
