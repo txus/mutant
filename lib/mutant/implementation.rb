@@ -9,8 +9,7 @@ module Mutant
     end
 
     def scope_type
-      {
-        SINGLETON_SCOPE => :singleton, INSTANCE_SCOPE => :instance
+      { SINGLETON_SCOPE => :singleton, INSTANCE_SCOPE => :instance
       }[method_scope]
     end
 

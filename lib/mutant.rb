@@ -2,6 +2,8 @@ require 'mutant/version'
 require 'mutant/implementation'
 require 'mutant/rbx'
 
+require 'mutant/support/random'
+
 module Mutant
   module Runners
     autoload :RSpec, 'mutant/runners/rspec'
