@@ -8,6 +8,7 @@ describe 'Mutating a class' do
         def dead?; false end
         def mood; :happy end
         def gender; 'male' end
+        def alphabet_range; 'a'..'k' end
       end
     """
     write_file 'spec/thing_spec.rb', """
@@ -28,6 +29,10 @@ describe 'Mutating a class' do
 
         describe '#gender' do
           specify { Thing.new.gender.should eq('male') }
+        end
+
+        describe '#alphabet_range' do
+          specify { Thing.new.alphabet_range.should eq('a'..'k') }
         end
       end
     """
