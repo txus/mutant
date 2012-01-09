@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = 'mutant'
   s.version     = Mutant::VERSION
   s.authors     = ["Justin Ko"]
-  s.email       = ["jko170@gmail.com"]
+  s.email       = ["justin@kospecinc.com"]
   s.homepage    = ""
   s.summary     = %q{Mutation tester}
   s.description = %q{Mutation tester}

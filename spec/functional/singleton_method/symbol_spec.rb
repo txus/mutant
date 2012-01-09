@@ -30,13 +30,13 @@ describe 'Mutating symbols' do
         end
       end
 
-      context 'with an expectation that the return value is not :foo' do
+      context 'with an expectation that the return value is a symbol' do
         before do
           write_file 'spec/thing_spec.rb', """
             require 'thing'
 
             describe 'Thing.a_symbol' do
-              specify { Thing.a_symbol.should_not eq(:foo) }
+              specify { Thing.a_symbol.should be_a(Symbol) }
             end
           """
           run_simple '../../bin/mutate Thing.a_symbol spec/thing_spec.rb'

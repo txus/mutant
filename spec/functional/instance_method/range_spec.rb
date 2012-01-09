@@ -30,13 +30,13 @@ describe 'Mutating ranges' do
         end
       end
 
-      context "with an expectation that the return value is not `'a'..'z'`" do
+      context "with an expectation that the return value is a range" do
         before do
           write_file 'spec/thing_spec.rb', """
             require 'thing'
 
             describe 'Thing#a_range' do
-              specify { Thing.new.a_range.should_not eq('a'..'z') }
+              specify { Thing.new.a_range.should be_a(Range) }
             end
           """
           run_simple '../../bin/mutate Thing#a_range spec/thing_spec.rb'

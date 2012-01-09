@@ -30,13 +30,13 @@ describe 'Mutating strings' do
         end
       end
 
-      context 'with an expectation that the return value is not "foo"' do
+      context 'with an expectation that the return value is a string' do
         before do
           write_file 'spec/thing_spec.rb', """
             require 'thing'
 
             describe 'Thing#a_string' do
-              specify { Thing.new.a_string.should_not eq('foo') }
+              specify { Thing.new.a_string.should be_a(String) }
             end
           """
           run_simple '../../bin/mutate Thing#a_string spec/thing_spec.rb'
