@@ -1,7 +1,7 @@
 require 'mutant/version'
 require 'mutant/implementation'
 require 'mutant/rbx'
-
+require 'mutant/reporter'
 require 'mutant/support/random'
 
 module Mutant

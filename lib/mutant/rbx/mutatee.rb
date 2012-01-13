@@ -4,12 +4,12 @@ module Mutant
       extend Forwardable
 
       attr_reader :implementation
-      
+
       def initialize(implementation)
         @implementation = implementation
       end
 
-      def_delegators :@implementation, :class_name, :method_name
+      def_delegators :@implementation, :class_name, :method_name, :to_s
 
       def rbx_method
         @rbx_method ||=

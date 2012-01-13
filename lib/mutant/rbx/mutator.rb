@@ -10,6 +10,16 @@ module Mutant
 
         @ast = Marshal.load(Marshal.dump(@mutatee.rbx_method.ast))
         body = @mutatee.rbx_method.is_a?(SingletonMethod) ? @ast.body.body : @ast.body
+
+        body.array.delete_if {|literal| literal.is_a?(Rubinius::AST::NilLiteral) }
+
+        if body.array.size.zero?
+          Reporter.no_mutations(@mutatee)
+          return
+        else
+          Reporter.method_loaded(@mutatee, body.array.size)
+        end
+
         body.array = [ swap(body.array[0]) ]
 
         block = Rubinius::AST::Block.new(1, [ @ast ])

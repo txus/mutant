@@ -55,6 +55,10 @@ module Mutant
       end
     end
 
+    def to_s
+      @str
+    end
+
     private
 
     def format_method(meth_name, method_scope_type)
