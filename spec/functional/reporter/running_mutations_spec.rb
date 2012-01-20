@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'Reporter' do
-	describe 'running mutations' do
-   context 'for a method that has 3 mutations' do
-  	  before do
+  describe 'running mutations' do
+    context 'for a method that has 3 mutations' do
+      before do
         write_file 'thing.rb', <<-CODE
 class Thing
   def alive?
