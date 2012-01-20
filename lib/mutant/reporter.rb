@@ -2,13 +2,19 @@ module Mutant
 	class Reporter
 		WIDTH = 70
 
-		def self.method_loaded(method, mutations_count)
-			info "#{method} loaded with #{mutations_count} " \
-					 "possible #{pluralize(mutations_count, 'mutation')}"
+		def self.mutating(mutation)
+			puts "Mutating line #{mutation.line}"
+			puts "  #{mutation.from} >>>#{mutation.to.nested? ? "\n  " : " "}#{mutation.to}"
+			puts
 		end
 
-		def self.no_mutations(method)
-			warning "#{method} has no possible mutations"
+		def self.method_loaded(mutatee)
+			info "#{mutatee} loaded with #{mutatee.mutations.size} " \
+					 "possible #{pluralize(mutatee.mutations.size, 'mutation')}"
+		end
+
+		def self.no_mutations(mutatee)
+			warning "#{mutatee} has no possible mutations"
 		end
 
 		def self.info(message)

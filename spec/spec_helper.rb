@@ -8,6 +8,9 @@ RSpec.configure do |config|
   config.include Aruba::Api, :example_group => {
     :file_path => /spec\/functional/
   }
+  config.before(:each, :example_group => {:file_path => /spec\/functional/}) do
+  	@aruba_timeout_seconds = 5
+  end
   config.after(:each, :example_group => {:file_path => /spec\/functional/}) do
 		FileUtils.remove_dir('tmp/aruba')
 	end

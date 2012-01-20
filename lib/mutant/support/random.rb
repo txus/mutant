@@ -3,16 +3,24 @@ module Mutant
 		ALLOWED_SYMBOL_CHARACTERS = Array('a'..'z') + Array('A'..'Z')
 
 		def self.string
+			ENV['RANDOM_STRING'] or
     	Array.new(rand(50)) { rand(126).chr }.join
 		end
 
 		def self.symbol
-			Array.new(rand(50).next) { ALLOWED_SYMBOL_CHARACTERS.choice }.join.to_sym
+			( ENV['RANDOM_SYMBOL'] or
+				Array.new(rand(50).next) { ALLOWED_SYMBOL_CHARACTERS.choice }.join
+			).to_sym
 		end
 
 		def self.range
-	    min, max = rand(50)
-    	max = min + rand(50)
+			if ENV['RANDOM_RANGE_MIN'] and ENV['RANDOM_RANGE_MAX']
+				min, max = ENV['RANDOM_RANGE_MIN'], ENV['RANDOM_RANGE_MAX']
+			else
+		    min, max = rand(50)
+	    	max = min + rand(50)
+	    end
+
     	Range.new(min, max)
    	end
 	end

@@ -1,67 +1,50 @@
 module Mutant
   module Rbx
     class Mutator
+      COMPILER = Rubinius::Compiler.new(:bytecode, :compiled_method)
+
       def initialize(mutatee)
         @mutatee = mutatee
       end
 
       def mutate
-        @mutatee.rbx_method.parse_file
+        @mutatee.clean
+        @mutatee.set_mutations
 
-        @ast = Marshal.load(Marshal.dump(@mutatee.rbx_method.ast))
-        body = @mutatee.rbx_method.is_a?(SingletonMethod) ? @ast.body.body : @ast.body
-
-        body.array.delete_if {|literal| literal.is_a?(Rubinius::AST::NilLiteral) }
-
-        if body.array.size.zero?
+        if @mutatee.mutations.size.zero?
           Reporter.no_mutations(@mutatee)
           return
         else
-          Reporter.method_loaded(@mutatee, body.array.size)
+          Reporter.method_loaded(@mutatee)
         end
 
-        body.array = [ swap(body.array[0]) ]
-
-        block = Rubinius::AST::Block.new(1, [ @ast ])
-
-        # wrap the method in an AST for the class
-        class_ast = Rubinius::AST::Class.new(
-          1, @mutatee.class_name.to_sym, nil, block
-        )
-
-        # create a script to contain the class AST
-        root = Rubinius::AST::Script.new(class_ast)
-        root.file = @mutatee.rbx_method.source_file
-
-        # setup the compiler
-        compiler = Rubinius::Compiler.new(:bytecode, :compiled_method)
-        compiler.generator.input(root)
-
-        # compile the script and replace the original method
-        # with the mutated method
-        cm     = compiler.run
-        script = cm.create_script
-        Rubinius.run_script script.compiled_method
+        @mutatee.mutations.each do |mutation|
+          @mutatee.body.array = mutation.mutate && mutation.array
+          Reporter.mutating(mutation)
+          # setup the compiler
+          COMPILER.generator.input(root)
+          # compile the script and replace the original method
+          # with the mutated method
+          Rubinius.run_script(compiled_method)
+        end
       end
 
-      private
+      def block
+        Rubinius::AST::Block.new(1, [ @mutatee.ast ])
+      end
 
-      def swap(literal)
-        case literal
-        when Rubinius::AST::TrueLiteral
-          Rubinius::AST::FalseLiteral.new(1)
-        when Rubinius::AST::FalseLiteral
-          Rubinius::AST::TrueLiteral.new(1)
-        when Rubinius::AST::SymbolLiteral
-          Rubinius::AST::SymbolLiteral.new(1, Random.symbol)
-        when Rubinius::AST::StringLiteral
-          Rubinius::AST::StringLiteral.new(1, Random.string)
-        when Rubinius::AST::Range
-          range = Random.range
-          min = Rubinius::AST::FixnumLiteral.new(1, range.min)
-          max = Rubinius::AST::FixnumLiteral.new(1, range.max)
-          Rubinius::AST::Range.new(1, min, max)
+      def class_ast
+        Rubinius::AST::Class.new(1, @mutatee.class_name.to_sym, nil, block)
+      end
+
+      def root
+        Rubinius::AST::Script.new(class_ast).tap do |script|
+          script.file = @mutatee.rbx_method.source_file
         end
+      end
+
+      def compiled_method
+        COMPILER.run.create_script.compiled_method
       end
     end
   end
