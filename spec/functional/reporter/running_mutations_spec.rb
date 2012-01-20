@@ -38,8 +38,8 @@ CODE
         ENV['RANDOM_RANGE_MAX'] = nil
       end
 
-  		it 'displays the info for each mutation' do
-  			all_output.should include <<-STR
+      it 'displays the info for each mutation' do
+        all_output.should include <<-STR
 Mutating line 3
   a_string = "foo" >>>
   a_string = "bar"
@@ -58,7 +58,7 @@ Mutating line 6
 Mutating line 7
   true >>> false
 STR
-  		end
+      end
     end
-	end
+  end
 end
