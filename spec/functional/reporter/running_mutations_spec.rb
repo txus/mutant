@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe 'Reporter' do
   describe 'running mutations' do
-    context 'for a method that has 3 mutations' do
-      before do
-        write_file 'thing.rb', <<-CODE
+    before do
+      write_file 'thing.rb', <<-CODE
 class Thing
   def alive?
     a_string = 'foo'
@@ -15,31 +14,31 @@ class Thing
   end
 end
 CODE
-        write_file 'spec/thing_spec.rb', """
-          require 'thing'
+      write_file 'spec/thing_spec.rb', """
+        require 'thing'
 
-          describe 'Thing#alive?' do
-            specify { Thing.new.should be_alive }
-          end
-        """
+        describe 'Thing#alive?' do
+          specify { Thing.new.should be_alive }
+        end
+      """
 
-        ENV['RANDOM_STRING'] = 'bar'
-        ENV['RANDOM_SYMBOL'] = 'foo'
-        ENV['RANDOM_RANGE_MIN'] = 'c'
-        ENV['RANDOM_RANGE_MAX'] = 'e'
+      ENV['RANDOM_STRING'] = 'bar'
+      ENV['RANDOM_SYMBOL'] = 'foo'
+      ENV['RANDOM_RANGE_MIN'] = 'c'
+      ENV['RANDOM_RANGE_MAX'] = 'e'
 
-        run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
-      end
+      run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
+    end
 
-      after do
-        ENV['RANDOM_STRING'] = nil
-        ENV['RANDOM_SYMBOL'] = nil
-        ENV['RANDOM_RANGE_MIN'] = nil
-        ENV['RANDOM_RANGE_MAX'] = nil
-      end
+    after do
+      ENV['RANDOM_STRING'] = nil
+      ENV['RANDOM_SYMBOL'] = nil
+      ENV['RANDOM_RANGE_MIN'] = nil
+      ENV['RANDOM_RANGE_MAX'] = nil
+    end
 
-      it 'displays the info for each mutation' do
-        all_output.should include <<-STR
+    it 'displays the details of each mutation as they are run' do
+      all_output.should include <<-STR
 Mutating line 3
   a_string = "foo" >>>
   a_string = "bar"
@@ -58,7 +57,6 @@ Mutating line 6
 Mutating line 7
   true >>> false
 STR
-      end
     end
   end
 end
