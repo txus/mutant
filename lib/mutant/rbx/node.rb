@@ -21,33 +21,7 @@ module Mutant
       end
 
       def swap
-        case @copy
-        when Rubinius::AST::TrueLiteral
-          @copy = Rubinius::AST::FalseLiteral.new(@copy.line)
-        when Rubinius::AST::FalseLiteral
-          @copy = Rubinius::AST::TrueLiteral.new(@copy.line)
-        when Rubinius::AST::SymbolLiteral
-          @copy.value = Random.symbol
-        when Rubinius::AST::StringLiteral
-          @copy.string = Random.string
-        when Rubinius::AST::Range
-          range = Random.range
-          @copy.start = if range.min.is_a?(String)
-            Rubinius::AST::StringLiteral.new(@copy.line, range.min)
-          else
-            Rubinius::AST::FixnumLiteral.new(@copy.line, range.min)
-          end
-          @copy.finish = if range.max.is_a?(String)
-            Rubinius::AST::StringLiteral.new(@copy.line, range.max)
-          else
-            Rubinius::AST::FixnumLiteral.new(@copy.line, range.max)
-          end
-        when Rubinius::AST::LocalVariableAssignment
-          @copy.value = self.class.new(@copy.value).swap
-        else
-          raise "Need to swap #{@item.inspect}"
-        end
-        @copy
+        @copy = Literal.new(@copy).swap
       end
 
       class Formatter

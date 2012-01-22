@@ -1,3 +1,4 @@
+require 'mutant/rbx/literal'
 require 'mutant/rbx/method'
 require 'mutant/rbx/mutatee'
 require 'mutant/rbx/mutation'

@@ -24,8 +24,8 @@ CODE
 
       ENV['RANDOM_STRING'] = 'bar'
       ENV['RANDOM_SYMBOL'] = 'foo'
-      ENV['RANDOM_RANGE_MIN'] = 'c'
-      ENV['RANDOM_RANGE_MAX'] = 'e'
+      ENV['RANDOM_RANGE_MIN'] = '1'
+      ENV['RANDOM_RANGE_MAX'] = '3'
 
       run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
     end
@@ -49,7 +49,7 @@ Mutating line 4
 
 Mutating line 5
   a_range = "a".."c" >>>
-  a_range = "c".."e"
+  a_range = 1..3
 
 Mutating line 6
   :symbol >>> :foo

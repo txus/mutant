@@ -15,7 +15,7 @@ module Mutant
 
 		def self.range
 			if ENV['RANDOM_RANGE_MIN'] and ENV['RANDOM_RANGE_MAX']
-				min, max = ENV['RANDOM_RANGE_MIN'], ENV['RANDOM_RANGE_MAX']
+				min, max = ENV['RANDOM_RANGE_MIN'].to_i, ENV['RANDOM_RANGE_MAX'].to_i
 			else
 		    min, max = rand(50)
 	    	max = min + rand(50)
