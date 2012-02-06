@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module Mutant
   module Rbx
     class Mutatee
