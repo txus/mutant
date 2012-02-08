@@ -1,4 +1,4 @@
-require 'mutant/version'
+require 'mutant/formatter'
 require 'mutant/implementation'
 require 'mutant/literal'
 require 'mutant/method'
@@ -8,6 +8,7 @@ require 'mutant/mutator'
 require 'mutant/node'
 require 'mutant/random'
 require 'mutant/reporter'
+require 'mutant/version'
 
 module Mutant
   module Runners
