@@ -61,6 +61,8 @@ module Mutant
           @node
         end
 
+        private
+
         def literal_class
           Module.nesting[1].literal_class(@node.value)
         end
