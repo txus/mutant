@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe Mutant::Literal do
   describe '.literal_class' do
     context 'given an instance of Rubinius::AST::TrueLiteral' do
