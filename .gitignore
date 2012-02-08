@@ -6,3 +6,4 @@ pkg/*
 tmp
 *.rbx
 *.rbc
+bin
