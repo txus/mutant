@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'Reporter' do
-	describe 'method loaded' do
+  describe 'method loaded' do
    context 'that has mutations' do
-  	  before do
+      before do
         write_file 'thing.rb', """
           class Thing
             def alive?
@@ -21,13 +21,13 @@ describe 'Reporter' do
         run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
       end
 
-  		it 'displays the number of possible mutations' do
-  			all_output.should include <<-STR
+      it 'displays the number of possible mutations' do
+        all_output.should include <<-STR
 **********************************************************************
 ***  Thing#alive? loaded with 1 possible mutation
 **********************************************************************
 STR
-  		end
+      end
     end
 
     context 'that has no mutations' do
@@ -56,5 +56,5 @@ STR
 STR
       end
     end
-	end
+  end
 end

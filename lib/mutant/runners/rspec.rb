@@ -26,7 +26,7 @@ module Mutant
       end
 
       def mutate
-        Rbx.mutate(@implementation)
+        Mutant.mutate(@implementation)
       end
     end
   end

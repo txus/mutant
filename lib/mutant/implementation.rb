@@ -51,7 +51,7 @@ module Mutant
 
     def mutatees
       Array(method_scope ? self : all_implementations).map do |impl|
-        Rbx::Mutatee.new(impl)
+        Mutatee.new(impl)
       end
     end
 

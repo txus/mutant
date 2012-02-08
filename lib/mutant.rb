@@ -1,8 +1,13 @@
 require 'mutant/version'
 require 'mutant/implementation'
-require 'mutant/rbx'
+require 'mutant/literal'
+require 'mutant/method'
+require 'mutant/mutatee'
+require 'mutant/mutation'
+require 'mutant/mutator'
+require 'mutant/node'
+require 'mutant/random'
 require 'mutant/reporter'
-require 'mutant/support/random'
 
 module Mutant
   module Runners
@@ -11,5 +16,11 @@ module Mutant
 
   def self.run(args)
     Runners::RSpec.run(args)
+  end
+
+  def self.mutate(implementation)
+    implementation.mutatees.each do |mutatee|
+      Mutator.new(mutatee).mutate
+    end
   end
 end
