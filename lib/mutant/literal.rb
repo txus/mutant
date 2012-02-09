@@ -1,7 +1,7 @@
 module Mutant
   class Literal
     def self.literal_class(node)
-      const_get(node.class.name.split('::').last)
+      const_get(node.class.basename)
     end
 
     def initialize(node)
@@ -13,39 +13,39 @@ module Mutant
       @class.new(@node).swap
     end
 
-    class Base
+    class BaseLiteral
       def initialize(node)
         @node = node
       end
     end
 
-    class FalseLiteral < Base
+    class FalseLiteral < BaseLiteral
       def swap
         Rubinius::AST::TrueLiteral.new(@node.line)
       end
     end
 
-    class TrueLiteral < Base
+    class TrueLiteral < BaseLiteral
       def swap
         Rubinius::AST::FalseLiteral.new(@node.line)
       end
     end
 
-    class SymbolLiteral < Base
+    class SymbolLiteral < BaseLiteral
       def swap
         @node.value = Random.symbol
         @node
       end
     end
 
-    class StringLiteral < Base
+    class StringLiteral < BaseLiteral
       def swap
         @node.string = Random.string
         @node
       end
     end
 
-    class Range < Base
+    class Range < BaseLiteral
       def swap
         range = Random.range
         @node.start = Rubinius::AST::FixnumLiteral.new(@node.line, range.min)
@@ -54,7 +54,7 @@ module Mutant
       end
     end
 
-    class LocalVariableAssignment < Base
+    class LocalVariableAssignment < BaseLiteral
       def swap
         @node.value = literal_class.new(@node.value.clone).swap
         @node

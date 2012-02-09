@@ -14,7 +14,9 @@ module Mutant
     def_delegators :@implementation, :class_name, :method_name, :to_s
 
     def clean
-      body.array.delete_if {|literal| literal.is_a?(Rubinius::AST::NilLiteral) }
+      body.array.delete_if do |literal|
+        not Mutant::Literal.constants.include?(literal.class.basename)
+      end
     end
 
     def set_mutations
@@ -40,18 +42,13 @@ module Mutant
     end
 
     def rbx_method
-      @rbx_method ||= begin
+      @rbx_method ||=
         case implementation.scope_type
-        when :singleton
-          SingletonMethod.new(
-            implementation.constant.method(method_name)
-          )
-        when :instance
-          InstanceMethod.new(
-            implementation.constant.instance_method(method_name)
-          )
+        when :singleton then SingletonMethod.new \
+          implementation.constant.method(method_name)
+        when :instance then InstanceMethod.new \
+          implementation.constant.instance_method(method_name)
         end
-      end
     end
 
     private
