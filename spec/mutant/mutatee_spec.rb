@@ -2,15 +2,13 @@ require 'spec_helper'
 
 describe Mutant::Mutatee do
   describe '#rbx_method' do
-    before do
-      class ::Foo
-        def self.bar; end
-        def bar; end
-      end
+    setup_thing do
+      def self.bar; end
+      def bar; end
     end
 
-    context 'given an Implementation for a singleton method' do
-      let(:implementation) { Mutant::Implementation.new('Foo.bar') }
+    context 'given an implementation for a singleton method' do
+      let(:implementation) { Mutant::Implementation.new('Thing.bar') }
       let(:mutatee) { Mutant::Mutatee.new(implementation) }
 
       it 'returns a SingletonMethod' do
@@ -18,8 +16,8 @@ describe Mutant::Mutatee do
       end
     end
 
-    context 'given an Implementation for an instance method' do
-      let(:implementation) { Mutant::Implementation.new('Foo#bar') }
+    context 'given an implementation for an instance method' do
+      let(:implementation) { Mutant::Implementation.new('Thing#bar') }
       let(:mutatee) { Mutant::Mutatee.new(implementation) }
 
       it 'returns an InstanceMethod' do

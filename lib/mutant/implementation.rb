@@ -26,7 +26,9 @@ module Mutant
     end
 
     def constant
-      Object.const_get(class_name)
+      class_name.split(/::/).inject(Object) do |context, name|
+        context.const_get name
+      end
     end
 
     def all_implementations

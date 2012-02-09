@@ -1,17 +1,6 @@
 require 'spec_helper'
 
 describe Mutant::Implementation do
-  def self.setup_thing(&block)
-    before do
-      Object.const_set(:Thing, Class.new)
-      Object.const_get(:Thing).class_eval(&block) if block
-    end
-
-    after do
-      Object.send(:remove_const, :Thing) if Object.const_defined?(:Thing)
-    end
-  end
-
   describe '#scope_type' do
     context 'given "Thing.alive?"' do
       it 'returns :singleton' do
@@ -36,6 +25,13 @@ describe Mutant::Implementation do
     context 'given "Thing.alive?"' do
       it 'returns "Thing"' do
         Mutant::Implementation.new('Thing.alive?').class_name.should eq('Thing')
+      end
+    end
+
+    context 'given "Thing::Spirit#alive?"' do
+      it 'returns "Thing::Spirit"' do
+        Mutant::Implementation.new('Thing::Spirit#alive?').
+          class_name.should eq('Thing::Spirit')
       end
     end
   end
@@ -88,6 +84,16 @@ describe Mutant::Implementation do
 
       it 'returns Thing' do
         implementation.constant.should eq(Thing)
+      end
+    end
+
+    context 'given "Thing::Spirit"' do
+      setup_thing { class Spirit; end }
+
+      let(:implementation) { Mutant::Implementation.new('Thing::Spirit') }
+
+      it 'returns Thing::Spirit' do
+        implementation.constant.should eq(Thing::Spirit)
       end
     end
   end
