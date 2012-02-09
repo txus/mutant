@@ -1,3 +1,4 @@
+require 'mutant/extensions'
 require 'mutant/formatter'
 require 'mutant/implementation'
 require 'mutant/literal'
