@@ -19,6 +19,12 @@ describe Mutant::Random do
     end
   end
 
+  describe '.float' do
+    it 'returns a random float' do
+      Mutant::Random.float.should be_a(Float)
+    end
+  end
+
   describe '.range' do
     it 'returns a random range' do
       Mutant::Random.range.should be_a(Range)

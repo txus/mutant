@@ -18,6 +18,11 @@ module Mutant
       rand(100)
     end
 
+    def self.float
+      ENV['RANDOM_FLOAT'] or
+      (rand(100) + 0.5)
+    end
+
     def self.range
       if ENV['RANDOM_RANGE_MIN'] and ENV['RANDOM_RANGE_MAX']
         min, max = ENV['RANDOM_RANGE_MIN'].to_i, ENV['RANDOM_RANGE_MAX'].to_i

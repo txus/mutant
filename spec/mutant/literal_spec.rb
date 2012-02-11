@@ -83,6 +83,17 @@ describe Mutant::Literal do
     end
   end
 
+  describe Mutant::Literal::FloatLiteral do
+    describe '#swap' do
+      let(:node) { double('node') }
+
+      it "sets the node's value to a random float" do
+        node.should_receive(:value=).with(instance_of(Float))
+        Mutant::Literal::FloatLiteral.new(node).swap.should eq(node)
+      end
+    end
+  end
+
   describe Mutant::Literal::Range do
     describe '#swap' do
       let(:node) { double('node', :line => 1) }
