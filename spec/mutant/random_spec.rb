@@ -13,6 +13,12 @@ describe Mutant::Random do
     end
   end
 
+  describe '.fixnum' do
+    it 'returns a random fixnum' do
+      Mutant::Random.fixnum.should be_a(Fixnum)
+    end
+  end
+
   describe '.range' do
     it 'returns a random range' do
       Mutant::Random.range.should be_a(Range)

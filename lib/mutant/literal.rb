@@ -45,6 +45,13 @@ module Mutant
       end
     end
 
+    class FixnumLiteral < BaseLiteral
+      def swap
+        @node.value = Random.fixnum
+        @node
+      end
+    end
+
     class Range < BaseLiteral
       def swap
         range = Random.range

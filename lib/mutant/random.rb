@@ -13,6 +13,11 @@ module Mutant
       ).to_sym
     end
 
+    def self.fixnum
+      ENV['RANDOM_FIXNUM'] or
+      rand(100)
+    end
+
     def self.range
       if ENV['RANDOM_RANGE_MIN'] and ENV['RANDOM_RANGE_MAX']
         min, max = ENV['RANDOM_RANGE_MIN'].to_i, ENV['RANDOM_RANGE_MAX'].to_i
