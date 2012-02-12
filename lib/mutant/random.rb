@@ -3,24 +3,23 @@ module Mutant
     ALLOWED_SYMBOL_CHARACTERS = Array('a'..'z') + Array('A'..'Z')
 
     def self.string
-      ENV['RANDOM_STRING'] or
-      Array.new(rand(50)) { rand(126).chr }.join
+      ENV.fetch('RANDOM_STRING') {
+        Array.new(rand(50)) { rand(126).chr }.join
+      }
     end
 
     def self.symbol
-      ( ENV['RANDOM_SYMBOL'] or
+      ENV.fetch('RANDOM_SYMBOL') {
         Array.new(rand(50).next) { ALLOWED_SYMBOL_CHARACTERS.choice }.join
-      ).to_sym
+      }.to_sym
     end
 
     def self.fixnum
-      ENV['RANDOM_FIXNUM'] or
-      rand(100)
+      ENV.fetch('RANDOM_FIXNUM') { rand(100) }
     end
 
     def self.float
-      ENV['RANDOM_FLOAT'] or
-      (rand(100) + 0.5)
+      ENV.fetch('RANDOM_FLOAT') { (rand(100) + 0.5) }
     end
 
     def self.range
