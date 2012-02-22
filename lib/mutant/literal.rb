@@ -82,6 +82,28 @@ module Mutant
       end
     end
 
+    class HashLiteral < BaseLiteral
+      def swap
+        new_body = @node.array.each_slice(2).inject([]) do |body, array|
+          key, value = array
+          new_value = literal_class(value).new(value.clone).swap
+
+          body.push key
+          body.push new_value
+          body
+        end
+
+        @node.array = new_body
+        @node
+      end
+
+      private
+
+      def literal_class(value)
+        Module.nesting[1].literal_class(value)
+      end
+    end
+
     class LocalVariableAssignment < BaseLiteral
       def swap
         @node.value = literal_class.new(@node.value.clone).swap

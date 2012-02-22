@@ -34,6 +34,8 @@ module Mutant
         Regexp.new(value.source)
       when Rubinius::AST::ArrayLiteral
         value.body
+      when Rubinius::AST::HashLiteral
+        Hash[*value.array]
       else
         value.respond_to?(:string) ? value.string.inspect : value.value.inspect
       end
