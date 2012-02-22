@@ -75,6 +75,13 @@ module Mutant
       end
     end
 
+    class ArrayLiteral < BaseLiteral
+      def swap
+        @node.body = @node.body.reverse[1..-1]
+        @node
+      end
+    end
+
     class LocalVariableAssignment < BaseLiteral
       def swap
         @node.value = literal_class.new(@node.value.clone).swap

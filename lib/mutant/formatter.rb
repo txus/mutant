@@ -32,6 +32,8 @@ module Mutant
         Range.new(item_value(value.start), item_value(value.finish))
       when Rubinius::AST::RegexLiteral
         Regexp.new(value.source)
+      when Rubinius::AST::ArrayLiteral
+        value.body
       else
         value.respond_to?(:string) ? value.string.inspect : value.value.inspect
       end
