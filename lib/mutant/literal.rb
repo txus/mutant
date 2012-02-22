@@ -68,6 +68,13 @@ module Mutant
       end
     end
 
+    class RegexLiteral < BaseLiteral
+      def swap
+        @node.source = Regexp.escape(Random.string)
+        @node
+      end
+    end
+
     class LocalVariableAssignment < BaseLiteral
       def swap
         @node.value = literal_class.new(@node.value.clone).swap

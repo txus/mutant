@@ -30,6 +30,8 @@ module Mutant
       case value
       when Rubinius::AST::Range
         Range.new(item_value(value.start), item_value(value.finish))
+      when Rubinius::AST::RegexLiteral
+        Regexp.new(value.source)
       else
         value.respond_to?(:string) ? value.string.inspect : value.value.inspect
       end
