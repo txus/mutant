@@ -13,7 +13,7 @@ describe 'Runners' do
             specify { Thing.new.should_not be_alive }
           end
         """
-        run_simple '../../exe/mutate Thing#alive? spec/thing_spec.rb', false
+        mutate 'Thing#alive? spec/thing_spec.rb', false
       end
 
       it 'causes the run to abort' do

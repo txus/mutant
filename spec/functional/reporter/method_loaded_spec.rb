@@ -18,7 +18,7 @@ describe 'Reporter' do
             specify { Thing.new.should be_alive }
           end
         """
-        run_simple '../../exe/mutate Thing#alive? spec/thing_spec.rb'
+        mutate 'Thing#alive? spec/thing_spec.rb'
       end
 
       it 'displays the number of possible mutations' do
@@ -45,7 +45,7 @@ STR
             specify { Thing.new.alive?.should be_nil }
           end
         """
-        run_simple '../../exe/mutate Thing#alive? spec/thing_spec.rb'
+        mutate 'Thing#alive? spec/thing_spec.rb'
       end
 
       it 'displays a warning that there are no possible mutations' do

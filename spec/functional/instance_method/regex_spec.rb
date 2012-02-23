@@ -24,7 +24,7 @@ describe 'Mutating regexen' do
               end
             end
           """
-          run_simple '../../exe/mutate Thing#regex spec/thing_spec.rb'
+          mutate 'Thing#regex spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -41,7 +41,7 @@ describe 'Mutating regexen' do
               specify { Thing.new.regex.should be_kind_of(Regexp) }
             end
           """
-          run_simple '../../exe/mutate Thing#regex spec/thing_spec.rb'
+          mutate 'Thing#regex spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do

@@ -22,7 +22,7 @@ describe 'Mutating arrays' do
               specify { Thing.to_a.should eq([1,2,3]) }
             end
           """
-          run_simple '../../exe/mutate Thing.to_a spec/thing_spec.rb'
+          mutate 'Thing.to_a spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -39,7 +39,7 @@ describe 'Mutating arrays' do
               specify { Thing.to_a.should respond_to(:length) }
             end
           """
-          run_simple '../../exe/mutate Thing.to_a spec/thing_spec.rb'
+          mutate 'Thing.to_a spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do
