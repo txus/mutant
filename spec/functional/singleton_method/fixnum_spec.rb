@@ -22,7 +22,7 @@ describe 'Mutating fixnums' do
               specify { Life.answer.should eq(42) }
             end
           """
-          run_simple '../../bin/mutate Life.answer spec/life_spec.rb'
+          run_simple '../../exe/mutate Life.answer spec/life_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -39,7 +39,7 @@ describe 'Mutating fixnums' do
               specify { Life.answer.should be_a(Fixnum) }
             end
           """
-          run_simple '../../bin/mutate Life.answer spec/life_spec.rb'
+          run_simple '../../exe/mutate Life.answer spec/life_spec.rb'
         end
 
         specify 'the mutation fails' do

@@ -22,7 +22,7 @@ describe 'Mutating hashes' do
               specify { Thing.to_hash[:foo][:bar].should eq(3) }
             end
           """
-          run_simple '../../bin/mutate Thing.to_hash spec/thing_spec.rb'
+          run_simple '../../exe/mutate Thing.to_hash spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -39,7 +39,7 @@ describe 'Mutating hashes' do
               specify { Thing.to_hash[:foo][:bar].should be_kind_of(Fixnum) }
             end
           """
-          run_simple '../../bin/mutate Thing.to_hash spec/thing_spec.rb'
+          run_simple '../../exe/mutate Thing.to_hash spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do

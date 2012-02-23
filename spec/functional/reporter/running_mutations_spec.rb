@@ -27,7 +27,7 @@ CODE
       ENV['RANDOM_RANGE_MIN'] = '1'
       ENV['RANDOM_RANGE_MAX'] = '3'
 
-      run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
+      run_simple '../../exe/mutate Thing#alive? spec/thing_spec.rb'
     end
 
     after do
