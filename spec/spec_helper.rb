@@ -8,6 +8,7 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
   config.extend ExampleGroupHelpers
+  config.include ExampleHelpers
 
   {:example_group => {:file_path => /spec\/functional/}}.tap do |options|
     config.include Aruba::Api, options
