@@ -22,7 +22,7 @@ describe 'Mutating string' do
               specify { Thing.a_string.should eq('foo') }
             end
           """
-          run_simple '../../bin/mutate Thing.a_string spec/thing_spec.rb'
+          mutate 'Thing.a_string spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -39,7 +39,7 @@ describe 'Mutating string' do
               specify { Thing.a_string.should be_a(String) }
             end
           """
-          run_simple '../../bin/mutate Thing.a_string spec/thing_spec.rb'
+          mutate 'Thing.a_string spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do
