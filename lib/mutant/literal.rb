@@ -84,13 +84,10 @@ module Mutant
 
     class HashLiteral < BaseLiteral
       def swap
-        new_body = @node.array.each_slice(2).inject([]) do |body, array|
-          key, value = array
+        new_body = @node.array.each_slice(2).inject([]) do |body, (key, value)|
           new_value = literal_class(value).new(value.clone).swap
 
-          body.push key
-          body.push new_value
-          body
+          body << key << new_value
         end
 
         @node.array = new_body
