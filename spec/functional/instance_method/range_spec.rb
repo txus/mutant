@@ -16,6 +16,7 @@ describe 'Mutating ranges' do
       context "with an expectation that the return value is `'a'..'z'`" do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#a_range' do
@@ -33,6 +34,7 @@ describe 'Mutating ranges' do
       context "with an expectation that the return value is a range" do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#a_range' do

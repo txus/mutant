@@ -12,6 +12,7 @@ describe 'Mutating a class' do
       end
     """
     write_file 'spec/thing_spec.rb', """
+      $: << '.'
       require 'thing'
 
       describe Thing do

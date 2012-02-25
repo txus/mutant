@@ -1,1 +1,1 @@
-rvm use rbx-1.2.4@mutant --create
+rvm use rbx-head@mutant --create

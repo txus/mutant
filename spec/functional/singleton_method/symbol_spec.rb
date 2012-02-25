@@ -16,6 +16,7 @@ describe 'Mutating symbols' do
       context 'with an expectation that the return value is :foo' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing.a_symbol' do
@@ -33,6 +34,7 @@ describe 'Mutating symbols' do
       context 'with an expectation that the return value is a symbol' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing.a_symbol' do

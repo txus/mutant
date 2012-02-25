@@ -15,6 +15,7 @@ class Thing
 end
 CODE
       write_file 'spec/thing_spec.rb', """
+        $: << '.'
         require 'thing'
 
         describe 'Thing#alive?' do

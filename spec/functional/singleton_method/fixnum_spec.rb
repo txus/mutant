@@ -16,6 +16,7 @@ describe 'Mutating fixnums' do
       context 'with an expectation that the return value is 42' do
         before do
           write_file 'spec/life_spec.rb', """
+            $: << '.'
             require 'life'
 
             describe 'Life.answer' do
@@ -33,6 +34,7 @@ describe 'Mutating fixnums' do
       context 'with an expectation that the return value is a Fixnum' do
         before do
           write_file 'spec/life_spec.rb', """
+            $: << '.'
             require 'life'
 
             describe 'Life.answer' do

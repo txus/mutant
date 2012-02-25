@@ -41,7 +41,7 @@ module Mutant
 
     def all_singleton_methods
       constant.singleton_methods(false).delete_if {|meth_name|
-        meth_name == '__class_init__' }.map {|meth_name|
+        meth_name.to_s == '__class_init__' }.map {|meth_name|
           format_method(meth_name, SINGLETON_SCOPE)}
     end
 
@@ -64,7 +64,7 @@ module Mutant
     private
 
     def format_method(meth_name, method_scope_type)
-      class_name + method_scope_type + meth_name
+      class_name + method_scope_type + meth_name.to_s
     end
   end
 end

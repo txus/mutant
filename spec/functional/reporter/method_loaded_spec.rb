@@ -12,6 +12,7 @@ describe 'Reporter' do
           end
         """
         write_file 'spec/thing_spec.rb', """
+          $: << '.'
           require 'thing'
 
           describe 'Thing#alive?' do
@@ -39,6 +40,7 @@ STR
           end
         """
         write_file 'spec/thing_spec.rb', """
+          $: << '.'
           require 'thing'
 
           describe 'Thing#alive?' do

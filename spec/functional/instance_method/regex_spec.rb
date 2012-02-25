@@ -16,6 +16,7 @@ describe 'Mutating regexen' do
       context 'with an expectation that a string matches the regex' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#regex' do
@@ -35,6 +36,7 @@ describe 'Mutating regexen' do
       context 'with an expectation that the regex is a Regex' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#regex' do

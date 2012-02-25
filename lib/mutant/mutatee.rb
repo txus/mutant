@@ -15,7 +15,7 @@ module Mutant
 
     def clean
       body.array.delete_if do |literal|
-        not Mutant::Literal.constants.include?(literal.class.basename)
+        not Mutant::Literal.constants.map(&:to_sym).include?(literal.class.basename.to_sym)
       end
     end
 
@@ -34,11 +34,12 @@ module Mutant
     end
 
     def ast
-      @ast ||= rbx_method.parse_file && marshal(rbx_method.ast)
+      @ast ||= rbx_method.parse_file && rbx_method.ast
     end
 
     def body
       @body ||= rbx_method.is_a?(SingletonMethod) ? ast.body.body : ast.body
+
     end
 
     def rbx_method

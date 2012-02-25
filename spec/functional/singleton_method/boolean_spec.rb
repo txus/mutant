@@ -16,6 +16,7 @@ describe 'Mutating booleans' do
       context 'with an expectation that the return value is true' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing.alive?' do
@@ -33,6 +34,7 @@ describe 'Mutating booleans' do
       context 'with an expectation that the return value is true or false' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing.alive?' do
@@ -62,6 +64,7 @@ describe 'Mutating booleans' do
       context 'with an expectation that the return value is false' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing.alive?' do
@@ -79,6 +82,7 @@ describe 'Mutating booleans' do
       context 'with an expectation that the return value is true or false' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing.alive?' do

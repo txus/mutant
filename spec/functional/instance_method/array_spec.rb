@@ -16,6 +16,7 @@ describe 'Mutating arrays' do
       context 'with an expectation that the array is [1,2,3]' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#to_a' do
@@ -33,6 +34,7 @@ describe 'Mutating arrays' do
       context 'with an expectation that the array responds to length' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#to_a' do

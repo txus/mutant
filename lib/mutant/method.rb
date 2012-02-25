@@ -11,8 +11,8 @@ module Mutant
       super(source_file, DEFAULT_LINE)
     end
 
+    # TODO: Check for edge cases where just the line won't work.
     def match?(ast)
-      source_name == ast.name &&
       source_line == ast.line
     end
   end

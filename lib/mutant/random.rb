@@ -1,6 +1,7 @@
 module Mutant
   class Random
     ALLOWED_SYMBOL_CHARACTERS = Array('a'..'z') + Array('A'..'Z')
+    RANDOM_METHOD = Rubinius.ruby19? ? :sample : :choice
 
     def self.string
       ENV.fetch('RANDOM_STRING') {
@@ -10,7 +11,7 @@ module Mutant
 
     def self.symbol
       ENV.fetch('RANDOM_SYMBOL') {
-        Array.new(rand(50).next) { ALLOWED_SYMBOL_CHARACTERS.choice }.join
+        Array.new(rand(50).next) { ALLOWED_SYMBOL_CHARACTERS.send RANDOM_METHOD }.join
       }.to_sym
     end
 

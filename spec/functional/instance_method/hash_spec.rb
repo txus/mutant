@@ -16,6 +16,7 @@ describe 'Mutating hashes' do
       context 'with an expectation that hash[:foo][:bar] is 3' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#to_hash' do
@@ -33,6 +34,7 @@ describe 'Mutating hashes' do
       context 'with an expectation that hash[:foo][:bar] is a Fixnum' do
         before do
           write_file 'spec/thing_spec.rb', """
+            $: << '.'
             require 'thing'
 
             describe 'Thing#to_hash' do
