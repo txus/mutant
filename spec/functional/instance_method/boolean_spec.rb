@@ -23,7 +23,7 @@ describe 'Mutating booleans' do
               specify { Thing.new.should be_alive }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
+          mutate 'Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -41,7 +41,7 @@ describe 'Mutating booleans' do
               specify { String(Thing.new.alive?).should =~ /true|false/ }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
+          mutate 'Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do
@@ -71,7 +71,7 @@ describe 'Mutating booleans' do
               specify { Thing.new.should_not be_alive }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
+          mutate 'Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -89,7 +89,7 @@ describe 'Mutating booleans' do
               specify { String(Thing.new.alive?).should =~ /true|false/ }
             end
           """
-          run_simple '../../bin/mutate Thing#alive? spec/thing_spec.rb'
+          mutate 'Thing#alive? spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do

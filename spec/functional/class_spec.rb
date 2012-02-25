@@ -37,7 +37,7 @@ describe 'Mutating a class' do
         end
       end
     """
-    run_simple '../../bin/mutate Thing spec/thing_spec.rb'
+    mutate 'Thing spec/thing_spec.rb'
   end
 
   it 'runs all possible mutations' do

@@ -23,7 +23,7 @@ describe 'Mutating ranges' do
               specify { Thing.new.a_range.should eq('a'..'z') }
             end
           """
-          run_simple '../../bin/mutate Thing#a_range spec/thing_spec.rb'
+          mutate 'Thing#a_range spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -41,7 +41,7 @@ describe 'Mutating ranges' do
               specify { Thing.new.a_range.should be_a(Range) }
             end
           """
-          run_simple '../../bin/mutate Thing#a_range spec/thing_spec.rb'
+          mutate 'Thing#a_range spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do

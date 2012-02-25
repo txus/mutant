@@ -23,7 +23,7 @@ describe 'Mutating symbols' do
               specify { Thing.a_symbol.should eq(:foo) }
             end
           """
-          run_simple '../../bin/mutate Thing.a_symbol spec/thing_spec.rb'
+          mutate 'Thing.a_symbol spec/thing_spec.rb'
         end
 
         specify 'the mutation passes' do
@@ -41,7 +41,7 @@ describe 'Mutating symbols' do
               specify { Thing.a_symbol.should be_a(Symbol) }
             end
           """
-          run_simple '../../bin/mutate Thing.a_symbol spec/thing_spec.rb'
+          mutate 'Thing.a_symbol spec/thing_spec.rb'
         end
 
         specify 'the mutation fails' do
