@@ -41,16 +41,13 @@ CODE
     it 'displays the details of each mutation as they are run' do
       all_output.should include <<-STR
 Mutating line 3
-  a_string = "foo" >>>
-  a_string = "bar"
+  a_string = "foo" >>> a_string = "bar"
 
 Mutating line 4
-  a_symbol = :bar >>>
-  a_symbol = :foo
+  a_symbol = :bar >>> a_symbol = :foo
 
 Mutating line 5
-  a_range = "a".."c" >>>
-  a_range = 1..3
+  a_range = "a".."c" >>> a_range = 1..3
 
 Mutating line 6
   :symbol >>> :foo
