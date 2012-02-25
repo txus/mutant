@@ -8,3 +8,4 @@ tmp
 *.rbc
 bin
 .rbx
+test_spec.rb

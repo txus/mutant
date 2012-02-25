@@ -10,9 +10,6 @@ module Mutant
 
     def nested?
       false
-      # item.is_a?(Rubinius::AST::LocalVariableAssignment) ||
-      #   item.is_a?(Rubinius::AST::HashLiteral) ||
-      #   item.is_a?(Rubinius::AST::If)
     end
 
     def to_s

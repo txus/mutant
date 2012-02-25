@@ -113,5 +113,12 @@ module Mutant
         Module.nesting[1].literal_class(@node.value)
       end
     end
+
+    class If < BaseLiteral
+      def swap
+        @node.body, @node.else = @node.else, @node.body
+        @node
+      end
+    end
   end
 end
