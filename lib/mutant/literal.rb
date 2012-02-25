@@ -120,5 +120,15 @@ module Mutant
         @node
       end
     end
+
+    class Send < BaseLiteral
+      def swap
+        line  = @node.line
+        @node = Rubinius::AST::NilLiteral.new(line)
+        @node
+      end
+    end
+
+    SendWithArguments = Send
   end
 end
