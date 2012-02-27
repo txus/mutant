@@ -114,6 +114,19 @@ module Mutant
       end
     end
 
+    class InstanceVariableAssignment < BaseLiteral
+      def swap
+        @node.value = literal_class.new(@node.value.clone).swap
+        @node
+      end
+
+      private
+
+      def literal_class
+        Module.nesting[1].literal_class(@node.value)
+      end
+    end
+
     class If < BaseLiteral
       def swap
         @node.body, @node.else = @node.else, @node.body
