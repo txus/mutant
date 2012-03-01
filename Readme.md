@@ -4,6 +4,18 @@ Mutant is a mutation tester. It modifies your code and runs your tests to make s
 
 Largely based on [heckle](https://github.com/seattlerb/heckle), this is a rewrite on top of [Rubinius](http://rubini.us).
 
+## Usage
+
+````
+mutate "ClassName#method_to_test" spec
+````
+
+To test a class method, use:
+
+````
+mutate "ClassName.class_method_to_test" spec
+````
+
 ## Development roadmap
 
 As an experiment, I've set up a [public Trello board](https://trello.com/board/mutant/4f452510101d860b203b542d) with the development roadmap up to the 1.0 release. You can vote and comment cards to give constructive feedback to the project. Just have a look and leave a comment! :)
