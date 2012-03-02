@@ -13,7 +13,15 @@ module Mutant
       @class.new(@node).swap
     end
 
+    def changes_on_swap?
+      @class.changes_on_swap?(@node)
+    end
+
     class BaseLiteral
+      def self.changes_on_swap?(node)
+        true
+      end
+
       def initialize(node)
         @node = node
       end
@@ -83,6 +91,10 @@ module Mutant
     end
 
     class HashLiteral < BaseLiteral
+      def self.changes_on_swap?(node)
+        node.array != []
+      end
+
       def swap
         new_body = @node.array.each_slice(2).inject([]) do |body, (key, value)|
           new_value = literal_class(value).new(value.clone).swap

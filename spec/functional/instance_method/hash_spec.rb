@@ -2,6 +2,36 @@ require 'spec_helper'
 
 describe 'Mutating hashes' do
   context 'for an instance method' do
+    context 'that contains {}' do
+      before do
+        write_file 'thing.rb', """
+          class Thing
+            def to_hash
+              {}
+            end
+          end
+        """
+      end
+
+      context 'with an expectation that the method returns {}' do
+        before do
+          write_file 'spec/thing_spec.rb', """
+            $: << '.'
+            require 'thing'
+
+            describe 'Thing#to_hash' do
+              specify { Thing.new.to_hash.should === {} }
+            end
+          """
+          mutate 'Thing#to_hash spec/thing_spec.rb'
+        end
+
+        specify 'there are no possible mutations' do
+          all_output.should include('no possible mutations')
+        end
+      end
+    end
+
     context 'that contains {:foo => {:bar => 3}}' do
       before do
         write_file 'thing.rb', """

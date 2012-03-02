@@ -10,7 +10,7 @@ module Mutant
       @mutated = false
     end
 
-    def_delegators :@node, :line, :from, :to
+    def_delegators :@node, :line, :from, :to, :mutatable?
 
     def mutated?
       @mutated
