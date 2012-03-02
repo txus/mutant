@@ -21,7 +21,8 @@ module Mutant
 
     def set_mutations
       nodes.each do |node|
-        @mutations << Mutation.new(node, body.array)
+        mutation = Mutation.new(node, body.array)
+        @mutations << mutation if mutation.mutatable?
       end
     end
 

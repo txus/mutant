@@ -22,5 +22,9 @@ module Mutant
     def swap
       @copy = Literal.new(copy).swap
     end
+
+    def mutatable?
+      Literal.new(@copy).changes_on_swap?
+    end
   end
 end
