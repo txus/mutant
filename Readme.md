@@ -22,4 +22,4 @@ As an experiment, I've set up a [public Trello board](https://trello.com/board/m
 
 ## Who's this
 
-This project was originally created by [@justinko](http://twitter.com/justinko) and is released under the MIT license. I am pleased to be the current maintainer :) I'm [@txustice](http://twitter.com/txustice) on twitter (where you should probably follow me!).
+This project was originally created by [@justinko](http://twitter.com/justinko) (derived from [this gist](https://gist.github.com/1065789) by [@dkubb](http://twitter.com/dkubb)) and is released under the MIT license. I am pleased to be the current maintainer :) I'm [@txustice](http://twitter.com/txustice) on twitter (where you should probably follow me!).
