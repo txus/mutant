@@ -1,3 +1,7 @@
+# DEAD DEVELOPMENT
+
+Development at this location is dead. It moved to [mbj/mutant](https://github.com/mbj/mutant) where it was rewritten from scratch with more features and higher stability.
+
 # mutant [![Build Status](https://secure.travis-ci.org/txus/mutant.png)](http://travis-ci.org/txus/mutant) [![Dependency Status](https://gemnasium.com/txus/mutant.png)](https://gemnasium.com/txus/mutant)
 
 Mutant is a mutation tester. It modifies your code and runs your tests to make sure they fail. The idea is that if code can be changed and your tests don't notice, either that code isn't being covered or it doesn't do anything.
